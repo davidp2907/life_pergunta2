@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface FormData {
+  formId: string;
   startTime: string;
   fullName: string;
   email: string;
@@ -23,6 +24,7 @@ interface FormData {
 
 function App() {
   const [formData, setFormData] = useState<FormData>({
+    formId: "pergunta2",
     startTime: '',
     fullName: '',
     email: '',
@@ -178,11 +180,6 @@ function App() {
       newErrors.escolhaAtividade = 'Escolha da atividade é obrigatória';
     }
 
-    // Validate fractal de comportamento
-    if (!formData.fractalComportamento.trim()) {
-      newErrors.fractalComportamento = 'Fractal de comportamento é obrigatório';
-    }
-
     // Validate respostas
     formData.respostas.forEach((resposta, index) => {
       if (!resposta.resposta.trim()) {
@@ -219,7 +216,7 @@ function App() {
       console.log('Form submitted:', formData);
 
       // Enviando os dados para o Google Sheets
-      await fetch("https://script.google.com/macros/s/AKfycbxaB9wD6NkuH4OelPcVZDYJNws2V2a7GMmEWF8zAqKEuh49iSmYQ9BkQQnupXBfNer8/exec", {
+      await fetch("https://script.google.com/macros/s/AKfycbzXgfE61CgzLkZulpFa-nejVgHZikNzJmW3VrQYl78MfUzwEyQGRr-pGPNKPQEhHDMi/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
@@ -531,15 +528,12 @@ function App() {
           </div>
 
           {/* Seção QUADRO DE REGISTRO DE DADOS */}
-          {/* Fractal de Comportamento */}
-          <div>
-                <label className="block text-teal-700 font-medium mb-2">
-                  Fractal De Comportamento
-                </label>
-                <p>Suponha que você joga na Mega-Sena e ganha. Cite as 3 primeiras coisas que faria com o dinheiro. Hirarquize e justifique.</p>
-              </div>
           <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 shadow-lg">
             <h2 className="text-xl font-semibold text-teal-700 mb-6">QUADRO DE REGISTRO DE DADOS</h2>
+            <label className="block text-teal-700 font-medium mb-2">
+              Fractal De Comportamento
+              <p>Você precisa fazer uma longa viagem e só pode levar três referencias. Enumere, hierarquize e justifique.</p>
+            </label>
 
             <div className="overflow-x-auto">
               <table className="w-full border-collapse">
